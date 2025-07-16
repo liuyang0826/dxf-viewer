@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>SVG Zoom with Panzoom</title>
+    <style>
+      #container {
+        width: 100%;
+        height: 100vh;
+        overflow: hidden;
+      }
+      svg {
+        display: block;
+      }
+      body {
+        background-color: #000;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="container">
+      <div id="content"></div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/panzoom@9.4.0/dist/panzoom.min.js"></script>
+    <script>
+      const content = document.getElementById('content');
+      const container = document.getElementById('container');
+      const panzoomInstance = panzoom(content, {
+        maxZoom: 5,
+        minZoom: 0.2,
+        zoomSpeed: 0.5,
+      });
+
+      fetch('file.svg')
+        .then(res => res.text())
+        .then(text => {
+          content.innerHTML = text;
+        });
+    </script>
+  </body>
+</html>
